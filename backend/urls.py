@@ -16,6 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
+
+# A simple fallback welcome view function
+def home_index(request):
+    return JsonResponse({"message": "Welcome to the E-Commerce API!"})
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home_index),  # <-- This safely catches the root homepage route
+    # Your other e-commerce app routers go below...
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
